@@ -14,3 +14,8 @@ type InteractionData = {
     sanitizedLocale: import('src/i18n').Locales
     localize: import('src/i18n/i18n-types').TranslationFunctions 
 }
+
+type BotResponse = {
+    userId: string,
+    message: string
+}

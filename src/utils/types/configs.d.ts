@@ -91,6 +91,13 @@ type APIConfigType = {
     port: number
 }
 
+type ServerConfigType = {
+    test_server_id: string,
+    prod_server_id: string,
+    bot_log_test: string,
+    bot_log_prod: string
+}
+
 type WebsocketConfigType = {
 
     enabled: boolean
