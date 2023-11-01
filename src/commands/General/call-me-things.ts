@@ -2,7 +2,7 @@ import { serverConfig } from "@configs";
 import { BotResponse } from "@entities";
 import { Database } from "@services";
 import { simpleSuccessEmbed } from "@utils/functions";
-import { ApplicationCommandOptionType, CommandInteraction } from "discord.js";
+import { ApplicationCommandOptionType, CommandInteraction, User } from "discord.js";
 import { Discord, Slash, SlashOption } from "discordx";
 import { injectable } from "tsyringe";
 

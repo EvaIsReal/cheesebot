@@ -1,4 +1,4 @@
-import { ActionRowBuilder, ButtonBuilder, ButtonStyle, CommandInteraction, Embed, EmbedBuilder, MessageActionRowComponentBuilder, MessageContextMenuCommandInteraction } from "discord.js"
+import { ActionRowBuilder, ButtonBuilder, ButtonStyle, CommandInteraction, Embed, EmbedBuilder, Interaction, MessageActionRowComponentBuilder, MessageContextMenuCommandInteraction, TextBasedChannel } from "discord.js"
 
 import { replyToInteraction } from "@utils/functions"
 import { serverConfig } from "@configs"
@@ -55,7 +55,7 @@ export const sendMessageLogEmbed = async (interaction: MessageContextMenuCommand
 
         const embed = new EmbedBuilder()
             .setTitle("MESSAGE FLAGGED")
-            .setDescription(`A new Message has been flagged by <@${interaction.user.id}>!`)
+            .setDescription(`A message from <@${interaction.targetMessage.author.id}> has been flagged by <@${interaction.user.id}>!`)
             .setColor(0xfcba03)
             .addFields({name: "Message", value: interaction.targetMessage.content, inline: true})
             .setTimestamp()
@@ -75,4 +75,37 @@ export const sendMessageLogEmbed = async (interaction: MessageContextMenuCommand
             }
 
     }
+}
+
+export const lockdownLogEmbed = async (interaction: CommandInteraction) => {
+    const guild = interaction.guild;
+        const channel = guild?.channels.cache.get(serverConfig.bot_log_prod);
+
+        const embed = new EmbedBuilder()
+            .setTitle("MESSAGE FLAGGED")
+            .setDescription(`The channel <#${interaction.channel?.id}> has been locked down by <@${interaction.user.id}>!`)
+            .setColor(0xfcba03)
+            .setTimestamp()
+            .setThumbnail("https://st2.depositphotos.com/1001189/10099/v/450/depositphotos_100996864-stock-illustration-exclamation-point-danger-sign.jpg");
+
+            if(channel?.isTextBased()) {
+                await channel.send({embeds: [embed]})
+            }
+
+}
+
+export const lockdownRemoveEmbed = async (interaction: CommandInteraction) => {
+    const guild = interaction.guild;
+        const channel = guild?.channels.cache.get(serverConfig.bot_log_prod);
+
+        const embed = new EmbedBuilder()
+            .setTitle("MESSAGE FLAGGED")
+            .setDescription(`The channel <#${interaction.channel?.id}> has been unlocked by <@${interaction.user.id}>!`)
+            .setColor(0xfcba03)
+            .setTimestamp()
+            .setThumbnail("https://st2.depositphotos.com/1001189/10099/v/450/depositphotos_100996864-stock-illustration-exclamation-point-danger-sign.jpg");
+
+        if(channel?.isTextBased()) {
+            await channel.send({embeds: [embed]})
+        }
 }
