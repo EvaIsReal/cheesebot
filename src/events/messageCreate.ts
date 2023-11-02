@@ -9,6 +9,7 @@ import { REST, parseEmoji } from "discord.js"
 import { Responses } from "./chatEvent/botResponses"
 import { injectable } from "tsyringe"
 import { Database } from "@services"
+import { cwd } from "node:process"
 
 @Discord()
 @injectable()
@@ -24,6 +25,10 @@ export default class MessageCreateEvent {
         [message]: ArgsOf<"messageCreate">, 
         client: Client
      ) {
+
+        if(message.content.toLowerCase().includes(" whar ")) {
+            await message.reply("https://tenor.com/view/osaka-azumanga-daioh-azudaioh-osaker-ayumu-kasuga-gif-10912074555985567772");
+        }
 
         if(message.content.toLowerCase() == "what am i") {
             new Responses(this.db).sendSpecialReply(message);
