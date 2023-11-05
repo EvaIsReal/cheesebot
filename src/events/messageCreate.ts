@@ -26,7 +26,7 @@ export default class MessageCreateEvent {
         client: Client
      ) {
 
-        if(message.content.toLowerCase().includes(" whar ")) {
+        if(message.content.toLowerCase().match("\bwhar\b")) {
             await message.reply("https://tenor.com/view/osaka-azumanga-daioh-azudaioh-osaker-ayumu-kasuga-gif-10912074555985567772");
         }
 
@@ -34,11 +34,16 @@ export default class MessageCreateEvent {
             new Responses(this.db).sendSpecialReply(message);
         }
 
+        if(message.channel.id == "1170806125281673296") {
+            message.edit(message.content.replace("r", "w"));
+        }
+
+        /*
         if(randomNumber(1, 100) == 1) {
             const marf = message.guild?.emojis.cache.find(x => x.name == "marf");
             const marfspeak = message.guild?.emojis.cache.find(x => x.name == "marfspeakwhite")
             await message.reply(`${marf} ${marfspeak}`);
-        }
+        }*/
 
         // eval command
         if (

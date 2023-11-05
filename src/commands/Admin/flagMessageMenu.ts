@@ -10,7 +10,7 @@ export default class MessageContextMenu {
         name: "FlagMessage",
         type: ApplicationCommandType.Message,
         defaultMemberPermissions: [PermissionFlagsBits.BanMembers],
-        guilds: [serverConfig.test_server_id, serverConfig.prod_server_id]
+        //guilds: [serverConfig.test_server_id, serverConfig.prod_server_id]
     })
 
     async messageHandler(interaction: MessageContextMenuCommandInteraction) {

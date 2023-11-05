@@ -13,6 +13,8 @@ import { Database, ErrorHandler, EventManager, ImagesUpload, Logger, PluginsMana
 import { initDataTable, resolveDependency } from "@utils/functions"
 import { clientConfig } from "./client"
 import { RequestContext } from '@mikro-orm/core'
+import { Player } from 'discord-player'
+import { YouTubeExtractor } from '@discord-player/extractor'
 
 async function run() {
 
@@ -40,6 +42,10 @@ async function run() {
     // init the client
     DIService.engine = tsyringeDependencyRegistryEngine.setInjector(container)
     const client = new Client(clientConfig)
+
+    const player = new Player(client);
+    player.extractors.register(YouTubeExtractor, {  });
+    player.extractors.loadDefault();
     
     // Load all new events
     discordLogs(client, { debug: false })
